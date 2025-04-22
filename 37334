@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MarketHub - Multi-Vendor Marketplace</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <style>
+    :root {
+      --primary-bg: #2e8b57;
+      --primary-dark: #246b45;
+      --text-color: white;
+      --hover-bg: #1e5a36;
+      --accent: #daa520;
+      --light-bg: #f0f8f5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: var(--light-bg);
+    }
+    
+    /* Enhanced Navbar for Multi-Vendor */
+    nav {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      padding: 0.6rem 1rem;
+      gap: 0.5rem; 
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem; 
+    }
+
+    /* Row 1: Logo and Tagline */
+    .nav-top {
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin:0;
+      color: whitesmoke;
+      text-shadow:
+        0 0 5px #ddd,
+        0 0 10px #000,
+        0 0 150px var(--accent);  
+    }
+    .tagline {
+      font-size: 0.9rem;
+      font-style: italic;
+      margin: 0;
+      color: var(--accent);
+    }
+
+    /* Row 2: Navigation Links */
+    .nav-links-row {
+      justify-content: center;
+      width: 100%;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-links a {
+      font-size: 0.95rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      padding: 0.3rem 0;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: #caffc4;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    .nav-links a.active {
+      color: var(--accent);
+    }
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    /* Row 3: Search & Vendor Actions */
+    .nav-middle {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: 1rem;
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: 400px;
+      flex: 1;
+    }
+    .search-box {
+      padding: 0.5rem 1rem;
+      background:#fff;
+      color: var(--primary-dark);
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      flex: 1;
+    }
+    .search-button {
+      padding: 0.5rem 1.2rem;
+      background-color: var(--primary-dark);
+      color: white;
+      border: none;
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background-color 0.3s;
+    }
+    .search-button:hover {
+      background-color: var(--hover-bg);
+    }
+    .vendor-actions {
+      display: flex;
+      gap: 0.8rem;
+    }
+    .vendor-btn {
+      background-color: var(--accent);
+      color: #333;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .vendor-btn:hover {
+      background-color: #e6c065;
+      transform: translateY(-2px);
+    }
+
+    /* Row 4: User Actions */
+    .nav-bottom {
+      justify-content: space-between;
+      width: 100%;
+    }
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .cart-wishlist {
+      display: flex;
+      gap: 1rem;
+    }
+    .nav-icon {
+      position: relative;
+      color: white;
+      font-size: 1.2rem;
+    }
+    .icon-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: var(--accent);
+      color: #333;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .profile-dropdown {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .profile-img {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background-color: white;
+      border-radius: 8px;
+      list-style: none;
+      padding: 0.5rem 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: 200px;
+      z-index: 1001;
+    }
+    .profile-dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-menu li a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    .dropdown-menu li a i {
+      width: 20px;
+      color: var(--primary-dark);
+    }
+    .dropdown-menu li a:hover {
+      background-color: var(--light-bg);
+      color: var(--primary-dark);
+      padding-left: 1.2rem;
+    }
+    .dropdown-divider {
+      height: 1px;
+      background-color: #eee;
+      margin: 0.5rem 0;
+    }
+
+    /* Main Content */
+    .container {
+      display: flex;
+      padding: 1.5rem;
+      gap: 1.5rem;
+    }
+
+    /* Vendor Sidebar */
+    .vendor-sidebar {
+      width: 250px;
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 140px;
+      height: fit-content;
+    }
+    .vendor-sidebar h3 {
+      color: var(--primary-dark);
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+    .vendor-filter {
+      margin-bottom: 1.5rem;
+    }
+    .vendor-filter h4 {
+      color: var(--primary-dark);
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .vendor-filter h4 i {
+      font-size: 0.8rem;
+      color: #777;
+    }
+    .vendor-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .vendor-item {
+      margin-bottom: 0.8rem;
+    }
+    .vendor-link {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      text-decoration: none;
+      color: #333;
+      transition: all 0.3s;
+      padding: 0.4rem 0.6rem;
+      border-radius: 6px;
+    }
+    .vendor-link:hover {
+      background-color: var(--light-bg);
+      color: var(--primary-dark);
+      transform: translateX(5px);
+    }
+    .vendor-logo {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #eee;
+    }
+    .vendor-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    .vendor-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      margin-top: 0.2rem;
+    }
+    .vendor-rating i {
+      color: var(--accent);
+      font-size: 0.7rem;
+    }
+    .vendor-rating span {
+      font-size: 0.7rem;
+      color: #777;
+    }
+    .filter-option {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 0.6rem;
+    }
+    .filter-option input {
+      accent-color: var(--primary-dark);
+    }
+    .filter-option label {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .filter-btn {
+      background-color: var(--primary-dark);
+      color: white;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      width: 100%;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .filter-btn:hover {
+      background-color: var(--hover-bg);
+    }
+
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      background-color: white;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .section-title {
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    .sort-options {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .sort-label {
+      font-size: 0.9rem;
+      color: #555;
+    }
+    .sort-select {
+      padding: 0.4rem 0.8rem;
+      border-radius: 6px;
+      border: 1px solid #ddd;
+      background-color: white;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    /* Products Grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+      position: relative;
+    }
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    }
+    .vendor-tag {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background-color: rgba(255,255,255,0.9);
+      padding: 0.3rem 0.6rem;
+      border-radius: 20px;
+      font-size: 0.7rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      z-index: 1;
+    }
+    .vendor-tag img {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+    }
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: var(--accent);
+      color: #333;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: bold;
+    }
+    .product-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+    .product-info {
+      padding: 1rem;
+    }
+    .product-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      color: #333;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .product-vendor {
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 0.5rem;
+    }
+    .product-price {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 0.8rem 0;
+    }
+    .current-price {
+      font-weight: bold;
+      color: var(--primary-dark);
+      font-size: 1.1rem;
+    }
+    .original-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.9rem;
+    }
+    .discount {
+      color: #e53935;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .product-rating i {
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+    .product-rating span {
+      font-size: 0.8rem;
+      color: #777;
+    }
+    .product-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .action-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: var(--light-bg);
+      color: var(--primary-dark);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .action-btn:hover {
+      background-color: var(--primary-dark);
+      color: white;
+    }
+
+    /* Featured Vendors Section */
+    .featured-vendors {
+      margin-top: 2rem;
+      background-color: var(--light-bg);
+      padding: 1.5rem;
+      border-radius: 10px;
+    }
+    .vendors-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .vendor-card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      transition: all 0.3s;
+    }
+    .vendor-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    .vendor-card-img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      margin: 0 auto 1rem;
+    }
+    .vendor-card-name {
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin-bottom: 0.3rem;
+    }
+    .vendor-card-category {
+      font-size: 0.8rem;
+      color: #777;
+      margin-bottom: 0.8rem;
+    }
+    .vendor-card-btn {
+      background-color: var(--primary-dark);
+      color: white;
+      border: none;
+      padding: 0.4rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .vendor-card-btn:hover {
+      background-color: var(--hover-bg);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--primary-dark);
+      color: white;
+      padding: 3rem 1.5rem 1.5rem;
+      margin-top: 2rem;
+    }
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-column h3 {
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+    .footer-links {
+      list-style: none;
+    }
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 0.9rem;
+    }
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .social-links a {
+      color: white;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+    .social-links a:hover {
+      color: var(--accent);
+    }
+    .newsletter-form {
+      margin-top: 1rem;
+    }
+    .newsletter-input {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 4px;
+      border: none;
+      margin-bottom: 0.5rem;
+    }
+    .newsletter-btn {
+      background-color: var(--accent);
+      color: #333;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    .newsletter-btn:hover {
+      background-color: #e6c065;
+    }
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .container {
+        flex-direction: column;
+      }
+      .vendor-sidebar {
+        width: 100%;
+        position: static;
+        margin-bottom: 1.5rem;
+      }
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.6rem;
+      }
+      .nav-links {
+        gap: 1rem;
+      }
+      .nav-middle {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .search-container {
+        max-width: 100%;
+      }
+      .vendor-actions {
+        justify-content: center;
+      }
+      .products-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1rem;
+      }
+      .vendors-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .logo {
+        font-size: 1.5rem;
+      }
+      .nav-links {
+        font-size: 0.9rem;
+        gap: 0.8rem;
+      }
+      .vendor-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      .sort-options {
+        width: 100%;
+      }
+      .sort-select {
+        flex-grow: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <!-- Row 1: Logo and Tagline -->
+  <div class="nav-row nav-top">
+    <h1 class="logo">MarketHub</h1>
+    <p class="tagline">Your Multi-Vendor Marketplace</p>
+  </div>
+
+  <!-- Row 2: Navigation Links -->
+  <div class="nav-row nav-links-row">
+    <ul class="nav-links">
+      <li><a href="#" class="active"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-store"></i> Shops</a></li>
+      <li><a href="#"><i class="fa fa-list"></i> Categories</a></li>
+      <li><a href="#"><i class="fa fa-fire"></i> Deals</a></li>
+      <li><a href="#"><i class="fa fa-info-circle"></i> About</a></li>
+    </ul>
+  </div>
+
+  <!-- Row 3: Search & Vendor Actions -->
+  <div class="nav-row nav-middle">
+    <div class="search-container">
+      <input type="text" placeholder="Search products, vendors..." class="search-box" />
+      <button class="search-button"><i class="fa fa-search"></i> Search</button>
+    </div>     
+    <div class="vendor-actions">
+      <a href="#" class="vendor-btn"><i class="fa fa-store"></i> Become a Vendor</a>
+      <a href="#" class="vendor-btn"><i class="fa fa-sign-in-alt"></i> Vendor Login</a>
+    </div>
+  </div>
+
+  <!-- Row 4: User Actions -->
+  <div class="nav-row nav-bottom">
+    <div class="user-actions">
+      <div class="cart-wishlist">
+        <a href="#" class="nav-icon">
+          <i class="fa fa-heart"></i>
+          <span class="icon-badge">5</span>
+        </a>
+        <a href="#" class="nav-icon">
+          <i class="fa fa-shopping-cart"></i>
+          <span class="icon-badge">3</span>
+        </a>
+      </div>
+      <div class="profile-dropdown">
+        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="User" class="profile-img" />
+        <span>My Account</span>
+        <ul class="dropdown-menu">
+          <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+          <li><a href="#"><i class="fa fa-box"></i> Orders</a></li>
+          <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
+          <li><a href="#"><i class="fa fa-comment"></i> Messages</a></li>
+          <li class="dropdown-divider"></li>
+          <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+          <li><a href="#"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="container">
+  <!-- Vendor Sidebar -->
+  <aside class="vendor-sidebar">
+    <h3><i class="fa fa-filter"></i> Filter By</h3>
+    
+    <div class="vendor-filter">
+      <h4>Vendors <i class="fa fa-chevron-down"></i></h4>
+      <ul class="vendor-list">
+        <li class="vendor-item">
+          <a href="#" class="vendor-link">
+            <img src="https://randomuser.me/api/portraits/men/32.jpg" class="vendor-logo">
+            <div>
+              <div class="vendor-name">Nature's Best</div>
+              <div class="vendor-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+                <span>(128)</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="vendor-item">
+          <a href="#" class="vendor-link">
+            <img src="https://randomuser.me/api/portraits/women/44.jpg" class="vendor-logo">
+            <div>
+              <div class="vendor-name">Organic Living</div>
+              <div class="vendor-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <span>(256)</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="vendor-item">
+          <a href="#" class="vendor-link">
+            <img src="https://randomuser.me/api/portraits/men/75.jpg" class="vendor-logo">
+            <div>
+              <div class="vendor-name">Green Valley</div>
+              <div class="vendor-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <span>(87)</span>
+              </div>
+            </div>
+          </a>
+        </li>
+        <li class="vendor-item">
+          <a href="#" class="vendor-link">
+            <img src="https://randomuser.me/api/portraits/women/68.jpg" class="vendor-logo">
+            <div>
+              <div class="vendor-name">Herbal Haven</div>
+              <div class="vendor-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-half-alt"></i>
+                <span>(192)</span>
+              </div>
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+    
+    <div class="vendor-filter">
+      <h4>Categories <i class="fa fa-chevron-down"></i></h4>
+      <div class="filter-option">
+        <input type="checkbox" id="cat1" checked>
+        <label for="cat1">Herbal Teas</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="cat2">
+        <label for="cat2">Essential Oils</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="cat3" checked>
+        <label for="cat3">Natural Skincare</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="cat4">
+        <label for="cat4">Supplements</label>
+      </div>
+      <div class="filter-option">
+        <input type="checkbox" id="cat5">
+        <label for="cat5">Aromatherapy</label>
+      </div>
+    </div>
+    
+    <div class="vendor-filter">
+      <h4>Price Range <i class="fa fa-chevron-down"></i></h4>
+      <div class="filter-option">
+        <input type="radio" id="price1" name="price" checked>
+        <label for="price1">All Prices</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="price2" name="price">
+        <label for="price2">Under ₦2,000</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="price3" name="price">
+        <label for="price3">₦2,000 - ₦5,000</label>
+      </div>
+      <div class="filter-option">
+        <input type="radio" id="price4" name="price">
+        <label for="price4">Over ₦5,000</label>
+      </div>
+    </div>
+    
+    <button class="filter-btn">Apply Filters</button>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <div class="section-header">
+      <h2 class="section-title">Featured Products</h2>
+      <div class="sort-options">
+        <span class="sort-label">Sort by:</span>
+        <select class="sort-select">
+          <option>Popularity</option>
+          <option>Price: Low to High</option>
+          <option>Price: High to Low</option>
+          <option>Newest First</option>
+          <option>Customer Rating</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="products-grid">
+      <!-- Product Card 1 -->
+      <div class="product-card">
+        <div class="vendor-tag">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg">
+          Nature's Best
+        </div>
+        <span class="product-badge">-20%</span>
+        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c54" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Organic Chamomile Tea Blend</h3>
+          <div class="product-vendor">by Nature's Best</div>
+          <div class="product-price">
+            <span class="current-price">₦2,400</span>
+            <span class="original-price">₦3,000</span>
+            <span class="discount">20% off</span>
+          </div>
+          <div class="product-meta">
+            <div class="product-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-alt"></i>
+              <span>(128)</span>
+            </div>
+            <div class="product-actions">
+              <button class="action-btn"><i class="fa fa-heart"></i></button>
+              <button class="action-btn"><i class="fa fa-shopping-cart"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Product Card 2 -->
+      <div class="product-card">
+        <div class="vendor-tag">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg">
+          Organic Living
+        </div>
+        <span class="product-badge">New</span>
+        <img src="https://images.unsplash.com/photo-1600250397375-c0c1c7edcc38" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Lavender Essential Oil (100ml)</h3>
+          <div class="product-vendor">by Organic Living</div>
+          <div class="product-price">
+            <span class="current-price">₦4,500</span>
+          </div>
+          <div class="product-meta">
+            <div class="product-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <span>(256)</span>
+            </div>
+            <div class="product-actions">
+              <button class="action-btn"><i class="fa fa-heart"></i></button>
+              <button class="action-btn"><i class="fa fa-shopping-cart"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Product Card 3 -->
+      <div class="product-card">
+        <div class="vendor-tag">
+          <img src="https://randomuser.me/api/portraits/men/75.jpg">
+          Green Valley
+        </div>
+        <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Detox Herbal Tea Collection</h3>
+          <div class="product-vendor">by Green Valley</div>
+          <div class="product-price">
+            <span class="current-price">₦3,200</span>
+            <span class="original-price">₦4,000</span>
+            <span class="discount">20% off</span>
+          </div>
+          <div class="product-meta">
+            <div class="product-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <span>(87)</span>
+            </div>
+            <div class="product-actions">
+              <button class="action-btn"><i class="fa fa-heart"></i></button>
+              <button class="action-btn"><i class="fa fa-shopping-cart"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Product Card 4 -->
+      <div class="product-card">
+        <div class="vendor-tag">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg">
+          Herbal Haven
+        </div>
+        <span class="product-badge">-15%</span>
+        <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Neem & Turmeric Soap Bar</h3>
+          <div class="product-vendor">by Herbal Haven</div>
+          <div class="product-price">
+            <span class="current-price">₦1,700</span>
+            <span class="original-price">₦2,000</span>
+            <span class="discount">15% off</span>
+          </div>
+          <div class="product-meta">
+            <div class="product-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star-half-alt"></i>
+              <span>(192)</span>
+            </div>
+            <div class="product-actions">
+              <button class="action-btn"><i class="fa fa-heart"></i></button>
+              <button class="action-btn"><i class="fa fa-shopping-cart"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Product Card 5 -->
+      <div class="product-card">
+        <div class="vendor-tag">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg">
+          Nature's Best
+        </div>
+        <img src="https://images.unsplash.com/photo-1595341595379-cf0f2a3c18a3" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Peppermint Essential Oil (50ml)</h3>
+          <div class="product-vendor">by Nature's Best</div>
+          <div class="product-price">
+            <span class="current-price">₦3,800</span>
+          </div>
+          <div class="product-meta">
+            <div class="product-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <span>(145)</span>
+            </div>
+            <div class="product-actions">
+              <button class="action-btn"><i class="fa fa-heart"></i></button>
+              <button class="action-btn"><i class="fa fa-shopping-cart"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Product Card 6 -->
+      <div class="product-card">
+        <div class="vendor-tag">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg">
+          Organic Living
+        </div>
+        <span class="product-badge">Bestseller</span>
+        <img src="https://images.unsplash.com/photo-1625772452859-1c03d5bf1137" class="product-img">
+        <div class="product-info">
+          <h3 class="product-title">Aloe Vera Gel with Vitamin E</h3>
+          <div class="product-vendor">by Organic Living</div>
+          <div class="product-price">
+            <span class="current-price">₦2,800</span>
+            <span class="original-price">₦3,500</span>
+            <span class="discount">20% off</span>
+          </div>
+          <div class="product-meta">
+            <div class="product-rating">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <span>(312)</span>
+            </div>
+            <div class="product-actions">
+              <button class="action-btn"><i class="fa fa-heart"></i></button>
+              <button class="action-btn"><i class="fa fa-shopping-cart"></i></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Featured Vendors Section -->
+    <div class="featured-vendors">
+      <h2 class="section-title">Featured Vendors</h2>
+      <div class="vendors-grid">
+        <!-- Vendor Card 1 -->
+        <div class="vendor-card">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" class="vendor-card-img">
+          <h3 class="vendor-card-name">Nature's Best</h3>
+          <p class="vendor-card-category">Herbal Teas & Oils</p>
+          <div class="product-rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-alt"></i>
+            <span>(128)</span>
+          </div>
+          <button class="vendor-card-btn">Visit Store</button>
+        </div>
+        
+        <!-- Vendor Card 2 -->
+        <div class="vendor-card">
+          <img src="https://randomuser.me/api/portraits/women/44.jpg" class="vendor-card-img">
+          <h3 class="vendor-card-name">Organic Living</h3>
+          <p class="vendor-card-category">Natural Skincare</p>
+          <div class="product-rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <span>(256)</span>
+          </div>
+          <button class="vendor-card-btn">Visit Store</button>
+        </div>
+        
+        <!-- Vendor Card 3 -->
+        <div class="vendor-card">
+          <img src="https://randomuser.me/api/portraits/men/75.jpg" class="vendor-card-img">
+          <h3 class="vendor-card-name">Green Valley</h3>
+          <p class="vendor-card-category">Herbal Remedies</p>
+          <div class="product-rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <span>(87)</span>
+          </div>
+          <button class="vendor-card-btn">Visit Store</button>
+        </div>
+        
+        <!-- Vendor Card 4 -->
+        <div class="vendor-card">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" class="vendor-card-img">
+          <h3 class="vendor-card-name">Herbal Haven</h3>
+          <p class="vendor-card-category">Aromatherapy</p>
+          <div class="product-rating">
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star"></i>
+            <i class="fa fa-star-half-alt"></i>
+            <span>(192)</span>
+          </div>
+          <button class="vendor-card-btn">Visit Store</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-column">
+      <h3>MarketHub</h3>
+      <p>Your premier multi-vendor marketplace for quality products from trusted sellers.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Marketplace</h3>
+      <ul class="footer-links">
+        <li><a href="#">All Categories</a></li>
+        <li><a href="#">Featured Vendors</a></li>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Deals & Discounts</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Vendor Services</h3>
+      <ul class="footer-links">
+        <li><a href="#">Become a Vendor</a></li>
+        <li><a href="#">Vendor Dashboard</a></li>
+        <li><a href="#">Seller Resources</a></li>
+        <li><a href="#">Shipping Solutions</a></li>
+        <li><a href="#">Vendor Success Stories</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Customer Service</h3>
+      <ul class="footer-links">
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns & Refunds</a></li>
+        <li><a href="#">Track Order</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Newsletter</h3>
+      <p>Subscribe to get updates on new products and special offers!</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Your email address" class="newsletter-input">
+        <button type="submit" class="newsletter-btn">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="copyright">
+    <p>&copy; 2023 MarketHub. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
