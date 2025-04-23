@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarketHub - Login</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-bg: #2e8b57;
+      --primary-dark: #246b45;
+      --text-color: white;
+      --hover-bg: #1e5a36;
+      --accent: #daa520;
+      --light-bg: #f0f8f5;
+      --leaf-green: #8CA07D;
+      --earth-brown: #6B5B4D;
+      
+
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: var(--light-bg);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .login-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      padding: 2rem;
+      text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+}
+    
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .tagline {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 2rem;
+    }
+
+    .login-form h2 {
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      color: #555;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary-dark);
+    }
+
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .remember-me {
+      display: flex;
+      align-items: center;
+    }
+
+    .remember-me input {
+      margin-right: 0.5rem;
+    }
+
+    .forgot-password a {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 0.8rem;
+      background-color: var(--primary-dark);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .login-btn:hover {
+      background-color: var(--hover-bg);
+    }
+
+    .divider {
+      margin: 1.5rem 0;
+      display: flex;
+      align-items: center;
+      color: #777;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      flex: 1;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .divider::before {
+      margin-right: 1rem;
+    }
+
+    .divider::after {
+      margin-left: 1rem;
+    }
+
+    .social-login {
+      margin-bottom: 1.5rem;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 0.8rem;
+      margin-bottom: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background-color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .social-btn i {
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    .social-btn.google {
+      color: #DB4437;
+    }
+
+    .social-btn.facebook {
+      color: #4267B2;
+    }
+
+    .social-btn:hover {
+      background-color: var(--light-bg);
+    }
+
+    .signup-link {
+      margin-top: 1.5rem;
+      color: #555;
+    }
+
+    .signup-link a {
+      color: var(--primary-dark);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .vendor-login-link {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .vendor-login-link a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .animated-bg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, #f0f8f5, #e0efe0);
+  overflow: hidden;
+}
+
+.leaf {
+  position: absolute;
+  opacity: 0.8;
+  animation: float 15s infinite linear;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-100vh) rotate(360deg);
+  }
+}
+
+/* Leaf designs */
+.leaf1 {
+  width: 30px;
+  fill: var(--leaf-green);
+}
+
+.leaf2 {
+  width: 25px;
+  fill: #A2C5AC;
+}
+
+.leaf3 {
+  width: 35px;
+  fill: #556B2F;
+}
+
+/* Floating particles */
+.particle {
+  position: absolute;
+  background: var(--earth-brown);
+  border-radius: 50%;
+  animation: particle-float 20s infinite linear;
+}
+@keyframes particle-float {
+  0% { transform: translateY(100vh); }
+  100% { transform: translateY(-100vh); }
+}
+
+  </style>
+</head>
+<body>
+  <div class="login-container">
+  <div class="animated-bg" id="animatedBg"></div>
+    <div class="logo">MarketHub</div>
+    <div class="tagline">Your Multi-Vendor Marketplace</div>
+    
+    <div class="login-form">
+      <h2>Login to Your Account</h2>
+      
+      <form>
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
+        
+        <div class="remember-forgot">
+          <div class="remember-me">
+            <input type="checkbox" id="remember">
+            <label for="remember">Remember me</label>
+          </div>
+          <div class="forgot-password">
+            <a href="#">Forgot password?</a>
+          </div>
+        </div>
+        
+        <button type="submit" class="login-btn">Login</button>
+      </form>
+      
+      <div class="divider">or</div>
+      
+      <div class="social-login">
+        <button class="social-btn google">
+          <i class="fab fa-google"></i> Continue with Google
+        </button>
+        <button class="social-btn facebook">
+          <i class="fab fa-facebook-f"></i> Continue with Facebook
+        </button>
+      </div>
+      
+      <div class="signup-link">
+        Don't have an account? <a href="signup.html">Sign up</a>
+      </div>
+      
+      <div class="vendor-login-link">
+        Are you a vendor? <a href="vendor-login.html">Vendor login here</a>
+      </div>
+    </div>
+  </div>
+  <script>
+function createLeaf() {
+  const leaf = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  leaf.classList.add('leaf');
+  leaf.innerHTML = `
+    <path d="${getRandomLeafShape()}" />
+  `;
+  
+  // Random position and animation
+  leaf.style.left = Math.random() * 100 + '%';
+  leaf.style.animationDuration = (Math.random() * 10 + 8) + 's';
+  leaf.style.animationDelay = Math.random() * 5 + 's';
+  leaf.classList.add(`leaf${Math.floor(Math.random() * 3) + 1}`);
+  
+  document.getElementById('animatedBg').appendChild(leaf);
+}
+
+function getRandomLeafShape() {
+  const leaves = [
+    "M12 2C8 2 4 6 2 10s2 8 6 10 8-2 10-6-2-8-6-10z", // Simple leaf
+    "M12 2Q16 6 12 10Q8 6 12 2", // Oval leaf
+    "M12 2C15 1 18 3 19 6 20 9 18 12 15 13 12 14 9 12 8 9 7 6 9 3 12 2z" // Detailed leaf
+  ];
+  return leaves[Math.floor(Math.random() * leaves.length)];
+}
+
+// Create multiple leaves
+for(let i = 0; i < 15; i++) {
+  createLeaf();
+}
+
+// Create floating particles
+for(let i = 0; i < 20; i++) {
+  const particle = document.createElement('div');
+  particle.classList.add('particle');
+  particle.style.left = Math.random() * 100 + '%';
+  particle.style.width = particle.style.height = 
+    (Math.random() * 3 + 2) + 'px';
+  particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+  particle.style.animationDelay = Math.random() * 10 + 's';
+  document.getElementById('animatedBg').appendChild(particle);
+}
+</script>
+</body>
+</html>
