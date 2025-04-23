@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart & Checkout | MarketHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-bg: #2e8b57;
+      --primary-dark: #246b45;
+      --text-color: white;
+      --hover-bg: #1e5a36;
+      --accent: #daa520;
+      --light-bg: #f0f8f5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: var(--light-bg);
+    }
+    
+    /* Navbar (Same as your existing site) */
+    nav {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      padding: 0.6rem 1rem;
+      gap: 0.5rem; 
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem; 
+    }
+
+    .nav-top {
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin:0;
+      color: whitesmoke;
+      text-shadow:
+        0 0 5px #ddd,
+        0 0 10px #000,
+        0 0 150px var(--accent);  
+    }
+    .tagline {
+      font-size: 0.9rem;
+      font-style: italic;
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .nav-links-row {
+      justify-content: center;
+      width: 100%;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-links a {
+      font-size: 0.95rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      padding: 0.3rem 0;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: #caffc4;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    .nav-links a.active {
+      color: var(--accent);
+    }
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-middle {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: 1rem;
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: 400px;
+      flex: 1;
+    }
+    .search-box {
+      padding: 0.5rem 1rem;
+      background:#fff;
+      color: var(--primary-dark);
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      flex: 1;
+    }
+    .search-button {
+      padding: 0.5rem 1.2rem;
+      background-color: var(--primary-dark);
+      color: white;
+      border: none;
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background-color 0.3s;
+    }
+    .search-button:hover {
+      background-color: var(--hover-bg);
+    }
+    .vendor-actions {
+      display: flex;
+      gap: 0.8rem;
+    }
+    .vendor-btn {
+      background-color: var(--accent);
+      color: #333;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .vendor-btn:hover {
+      background-color: #e6c065;
+      transform: translateY(-2px);
+    }
+
+    .nav-bottom {
+      justify-content: space-between;
+      width: 100%;
+    }
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .cart-wishlist {
+      display: flex;
+      gap: 1rem;
+    }
+    .nav-icon {
+      position: relative;
+      color: white;
+      font-size: 1.2rem;
+    }
+    .icon-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: var(--accent);
+      color: #333;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .profile-dropdown {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .profile-img {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background-color: white;
+      border-radius: 8px;
+      list-style: none;
+      padding: 0.5rem 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: 200px;
+      z-index: 1001;
+    }
+    .profile-dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-menu li a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    .dropdown-menu li a i {
+      width: 20px;
+      color: var(--primary-dark);
+    }
+    .dropdown-menu li a:hover {
+      background-color: var(--light-bg);
+      color: var(--primary-dark);
+      padding-left: 1.2rem;
+    }
+    .dropdown-divider {
+      height: 1px;
+      background-color: #eee;
+      margin: 0.5rem 0;
+    }
+
+    /* Main Container */
+    .cart-container {
+      display: flex;
+      padding: 2rem;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Cart Items Section */
+    .cart-items {
+      flex: 2;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      padding: 1.5rem;
+    }
+
+    .section-title {
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .cart-item {
+      display: flex;
+      gap: 1.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item-img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      border-radius: 8px;
+      border: 1px solid #eee;
+    }
+
+    .cart-item-details {
+      flex: 1;
+    }
+
+    .cart-item-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-vendor {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 0.5rem;
+    }
+
+    .cart-item-price {
+      font-weight: bold;
+      color: var(--primary-dark);
+      margin-bottom: 0.8rem;
+    }
+
+    .cart-item-options {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 0.8rem;
+    }
+
+    .cart-item-actions {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .quantity-btn {
+      width: 30px;
+      height: 30px;
+      background-color: var(--light-bg);
+      color: var(--primary-dark);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quantity-input {
+      width: 40px;
+      height: 30px;
+      text-align: center;
+      border: none;
+      border-left: 1px solid #ddd;
+      border-right: 1px solid #ddd;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: #e53935;
+      cursor: pointer;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* Order Summary Section */
+    .order-summary {
+      flex: 1;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      padding: 1.5rem;
+      position: sticky;
+      top: 140px;
+      height: fit-content;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .summary-label {
+      color: #555;
+    }
+
+    .summary-value {
+      font-weight: 500;
+    }
+
+    .summary-total {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      margin: 1.5rem 0;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+
+    .checkout-btn {
+      width: 100%;
+      padding: 1rem;
+      background-color: var(--primary-dark);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 1rem;
+    }
+
+    .checkout-btn:hover {
+      background-color: var(--hover-bg);
+    }
+
+    .payment-methods {
+      margin-top: 1.5rem;
+    }
+
+    .payment-method {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 0.8rem;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .payment-method.selected {
+      border-color: var(--primary-dark);
+      background-color: var(--light-bg);
+    }
+
+    .payment-method input {
+      margin-right: 0.5rem;
+    }
+
+    .payment-icon {
+      font-size: 1.5rem;
+      color: #555;
+    }
+
+    /* Checkout Form */
+    .checkout-form {
+      flex: 2;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      padding: 1.5rem;
+    }
+
+    .form-section {
+      margin-bottom: 2rem;
+    }
+
+    .form-section-title {
+      font-size: 1.2rem;
+      color: var(--primary-dark);
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid #eee;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      flex: 1;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: #555;
+      font-weight: 500;
+    }
+
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary-dark);
+    }
+
+    .same-as-shipping {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .cart-container {
+        flex-direction: column;
+      }
+      
+      .order-summary {
+        position: static;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.6rem;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+      }
+      
+      .nav-middle {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      
+      .search-container {
+        max-width: 100%;
+      }
+      
+      .vendor-actions {
+        justify-content: center;
+      }
+      
+      .cart-item {
+        flex-direction: column;
+      }
+      
+      .cart-item-img {
+        width: 100%;
+        height: auto;
+        max-height: 200px;
+      }
+      
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .logo {
+        font-size: 1.5rem;
+      }
+      
+      .nav-links {
+        font-size: 0.9rem;
+        gap: 0.8rem;
+      }
+      
+      .vendor-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      
+      .section-title {
+        font-size: 1.3rem;
+      }
+    }
+
+    /* Checkout Steps */
+    .checkout-steps {
+      display: flex;
+      justify-content: space-between;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #ddd;
+      color: #777;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+      border: 3px solid white;
+    }
+
+    .step.active .step-number {
+      background-color: var(--primary-dark);
+      color: white;
+    }
+
+    .step.completed .step-number {
+      background-color: var(--accent);
+      color: #333;
+    }
+
+    .step-title {
+      font-size: 0.9rem;
+      color: #777;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    .step.active .step-title {
+      color: var(--primary-dark);
+      font-weight: bold;
+    }
+
+    .step.completed .step-title {
+      color: #555;
+    }
+
+    .checkout-steps::before {
+      content: '';
+      position: absolute;
+      top: 20px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background-color: #ddd;
+      z-index: 0;
+    }
+
+    .progress-bar {
+      position: absolute;
+      top: 20px;
+      left: 0;
+      height: 3px;
+      background-color: var(--primary-dark);
+      z-index: 1;
+      transition: width 0.3s;
+    }
+
+    /* Hidden Sections */
+    .section-hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <!-- Row 1: Logo and Tagline -->
+  <div class="nav-row nav-top">
+    <h1 class="logo">MarketHub</h1>
+    <p class="tagline">Your Multi-Vendor Marketplace</p>
+  </div>
+
+  <!-- Row 2: Navigation Links -->
+  <div class="nav-row nav-links-row">
+    <ul class="nav-links">
+      <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-store"></i> Shops</a></li>
+      <li><a href="#"><i class="fa fa-list"></i> Categories</a></li>
+      <li><a href="#"><i class="fa fa-fire"></i> Deals</a></li>
+      <li><a href="#" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+    </ul>
+  </div>
+
+  <!-- Row 3: Search & Vendor Actions -->
+  <div class="nav-row nav-middle">
+    <div class="search-container">
+      <input type="text" placeholder="Search products, vendors..." class="search-box" />
+      <button class="search-button"><i class="fa fa-search"></i> Search</button>
+    </div>     
+    <div class="vendor-actions">
+      <a href="#" class="vendor-btn"><i class="fa fa-store"></i> Become a Vendor</a>
+      <a href="#" class="vendor-btn"><i class="fa fa-sign-in-alt"></i> Vendor Login</a>
+    </div>
+  </div>
+
+  <!-- Row 4: User Actions -->
+  <div class="nav-row nav-bottom">
+    <div class="user-actions">
+      <div class="cart-wishlist">
+        <a href="#" class="nav-icon">
+          <i class="fa fa-heart"></i>
+          <span class="icon-badge">5</span>
+        </a>
+        <a href="#" class="nav-icon">
+          <i class="fa fa-shopping-cart"></i>
+          <span class="icon-badge">3</span>
+        </a>
+      </div>
+      <div class="profile-dropdown">
+        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="User" class="profile-img" />
+        <span>My Account</span>
+        <ul class="dropdown-menu">
+          <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+          <li><a href="#"><i class="fa fa-box"></i> Orders</a></li>
+          <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
+          <li><a href="#"><i class="fa fa-comment"></i> Messages</a></li>
+          <li class="dropdown-divider"></li>
+          <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+          <li><a href="#"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Cart Page -->
+<div class="cart-container" id="cart-page">
+  <!-- Cart Items -->
+  <div class="cart-items">
+    <h2 class="section-title">Your Shopping Cart (3 items)</h2>
+    
+    <!-- Cart Item 1 -->
+    <div class="cart-item">
+      <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c54" alt="Organic Chamomile Tea Blend" class="cart-item-img">
+      <div class="cart-item-details">
+        <h3 class="cart-item-title">Organic Chamomile Tea Blend</h3>
+        <div class="cart-item-vendor">by Nature's Best</div>
+        <div class="cart-item-price">₦2,400 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem; margin-left: 0.5rem;">₦3,000</span></div>
+        <div class="cart-item-options">Size: 50g</div>
+        <div class="cart-item-actions">
+          <div class="quantity-selector">
+            <button class="quantity-btn minus">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="remove-btn">
+            <i class="fa fa-trash-alt"></i> Remove
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cart Item 2 -->
+    <div class="cart-item">
+      <img src="https://images.unsplash.com/photo-1600250397375-c0c1c7edcc38" alt="Lavender Essential Oil" class="cart-item-img">
+      <div class="cart-item-details">
+        <h3 class="cart-item-title">Lavender Essential Oil (100ml)</h3>
+        <div class="cart-item-vendor">by Organic Living</div>
+        <div class="cart-item-price">₦4,500</div>
+        <div class="cart-item-actions">
+          <div class="quantity-selector">
+            <button class="quantity-btn minus">-</button>
+            <input type="number" value="1" min="1" class="quantity-input">
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="remove-btn">
+            <i class="fa fa-trash-alt"></i> Remove
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Cart Item 3 -->
+    <div class="cart-item">
+      <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae" alt="Neem & Turmeric Soap Bar" class="cart-item-img">
+      <div class="cart-item-details">
+        <h3 class="cart-item-title">Neem & Turmeric Soap Bar</h3>
+        <div class="cart-item-vendor">by Herbal Haven</div>
+        <div class="cart-item-price">₦1,700 <span style="text-decoration: line-through; color: #999; font-size: 0.9rem; margin-left: 0.5rem;">₦2,000</span></div>
+        <div class="cart-item-actions">
+          <div class="quantity-selector">
+            <button class="quantity-btn minus">-</button>
+            <input type="number" value="2" min="1" class="quantity-input">
+            <button class="quantity-btn plus">+</button>
+          </div>
+          <button class="remove-btn">
+            <i class="fa fa-trash-alt"></i> Remove
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; margin-top: 1.5rem;">
+      <a href="#" style="color: var(--primary-dark); text-decoration: none; font-weight: bold;">
+        <i class="fa fa-arrow-left"></i> Continue Shopping
+      </a>
+      <button id="proceed-to-checkout" style="background-color: var(--primary-dark); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer;">
+        Proceed to Checkout <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Order Summary -->
+  <div class="order-summary">
+    <h2 class="section-title">Order Summary</h2>
+    
+    <div class="summary-row">
+      <span class="summary-label">Subtotal (3 items)</span>
+      <span class="summary-value">₦8,600</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Discount</span>
+      <span class="summary-value" style="color: #e53935;">-₦900</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Shipping</span>
+      <span class="summary-value">₦500</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Tax</span>
+      <span class="summary-value">₦430</span>
+    </div>
+    
+    <div class="summary-row summary-total">
+      <span>Total</span>
+      <span>₦8,630</span>
+    </div>
+    
+    <div class="payment-methods">
+      <h3 style="font-size: 1rem; margin-bottom: 1rem; color: #555;">Payment Method</h3>
+      <div class="payment-method selected">
+        <input type="radio" name="payment" id="credit-card" checked>
+        <i class="fa fa-credit-card payment-icon"></i>
+        <label for="credit-card">Credit/Debit Card</label>
+      </div>
+      <div class="payment-method">
+        <input type="radio" name="payment" id="paypal">
+        <i class="fab fa-paypal payment-icon"></i>
+        <label for="paypal">PayPal</label>
+      </div>
+      <div class="payment-method">
+        <input type="radio" name="payment" id="bank-transfer">
+        <i class="fa fa-university payment-icon"></i>
+        <label for="bank-transfer">Bank Transfer</label>
+      </div>
+      <div class="payment-method">
+        <input type="radio" name="payment" id="cash-on-delivery">
+        <i class="fa fa-money-bill-wave payment-icon"></i>
+        <label for="cash-on-delivery">Cash on Delivery</label>
+      </div>
+    </div>
+    
+    <button class="checkout-btn">
+      <i class="fa fa-lock"></i> Secure Checkout
+    </button>
+    
+    <p style="font-size: 0.8rem; color: #777; margin-top: 1rem; text-align: center;">
+      <i class="fa fa-lock"></i> Your payment information is processed securely.
+    </p>
+  </div>
+</div>
+
+<!-- Checkout Page (Initially Hidden) -->
+<div class="cart-container section-hidden" id="checkout-page">
+  <!-- Checkout Steps -->
+  <div class="checkout-steps">
+    <div class="progress-bar" style="width: 33%;"></div>
+    <div class="step completed">
+      <div class="step-number">1</div>
+      <div class="step-title">Cart</div>
+    </div>
+    <div class="step active">
+      <div class="step-number">2</div>
+      <div class="step-title">Information</div>
+    </div>
+    <div class="step">
+      <div class="step-number">3</div>
+      <div class="step-title">Payment</div>
+    </div>
+    <div class="step">
+      <div class="step-number">4</div>
+      <div class="step-title">Review</div>
+    </div>
+  </div>
+  
+  <!-- Checkout Form -->
+  <div class="checkout-form">
+    <div class="form-section">
+      <h3 class="form-section-title">Contact Information</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" placeholder="+234 800 000 0000">
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <h3 class="form-section-title">Shipping Address</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" placeholder="John">
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" placeholder="Doe">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" id="address" placeholder="123 Main Street">
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" placeholder="Lagos">
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <select id="state">
+            <option value="">Select State</option>
+            <option value="Lagos">Lagos</option>
+            <option value="Abuja">Abuja</option>
+            <option value="Kano">Kano</option>
+            <option value="Rivers">Rivers</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="zip">Postal Code</label>
+          <input type="text" id="zip" placeholder="100001">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select id="country">
+          <option value="Nigeria" selected>Nigeria</option>
+          <option value="Ghana">Ghana</option>
+          <option value="Kenya">Kenya</option>
+        </select>
+      </div>
+      
+      <div class="form-group">
+        <label for="shipping-notes">Delivery Instructions (Optional)</label>
+        <textarea id="shipping-notes" rows="3" placeholder="Any special delivery instructions?"></textarea>
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <h3 class="form-section-title">Billing Address</h3>
+      <div class="same-as-shipping">
+        <input type="checkbox" id="same-as-shipping" checked>
+        <label for="same-as-shipping">Same as shipping address</label>
+      </div>
+      
+      <div id="billing-address-fields" style="display: none;">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="billing-first-name">First Name</label>
+            <input type="text" id="billing-first-name" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label for="billing-last-name">Last Name</label>
+            <input type="text" id="billing-last-name" placeholder="Doe">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="billing-address">Address</label>
+          <input type="text" id="billing-address" placeholder="123 Main Street">
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="billing-city">City</label>
+            <input type="text" id="billing-city" placeholder="Lagos">
+          </div>
+          <div class="form-group">
+            <label for="billing-state">State</label>
+            <select id="billing-state">
+              <option value="">Select State</option>
+              <option value="Lagos">Lagos</option>
+              <option value="Abuja">Abuja</option>
+              <option value="Kano">Kano</option>
+              <option value="Rivers">Rivers</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="billing-zip">Postal Code</label>
+            <input type="text" id="billing-zip" placeholder="100001">
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="form-section">
+      <h3 class="form-section-title">Shipping Method</h3>
+      <div class="payment-method selected" style="margin-bottom: 1rem;">
+        <input type="radio" name="shipping" id="standard-shipping" checked>
+        <i class="fa fa-truck payment-icon"></i>
+        <label for="standard-shipping">Standard Shipping (3-5 business days) - ₦500</label>
+      </div>
+      <div class="payment-method">
+        <input type="radio" name="shipping" id="express-shipping">
+        <i class="fa fa-bolt payment-icon"></i>
+        <label for="express-shipping">Express Shipping (1-2 business days) - ₦1,200</label>
+      </div>
+    </div>
+    
+    <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+      <a href="#" id="return-to-cart" style="color: var(--primary-dark); text-decoration: none; font-weight: bold;">
+        <i class="fa fa-arrow-left"></i> Return to Cart
+      </a>
+      <button id="continue-to-payment" style="background-color: var(--primary-dark); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; font-weight: bold; cursor: pointer;">
+        Continue to Payment <i class="fa fa-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Order Summary -->
+  <div class="order-summary">
+    <h2 class="section-title">Order Summary</h2>
+    
+    <div class="cart-item" style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">
+      <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c54" alt="Organic Chamomile Tea Blend" class="cart-item-img" style="width: 60px; height: 60px;">
+      <div class="cart-item-details">
+        <div class="cart-item-title" style="font-size: 0.9rem;">Organic Chamomile Tea Blend</div>
+        <div class="cart-item-price" style="font-size: 0.9rem;">₦2,400 × 1</div>
+      </div>
+    </div>
+    
+    <div class="cart-item" style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">
+      <img src="https://images.unsplash.com/photo-1600250397375-c0c1c7edcc38" alt="Lavender Essential Oil" class="cart-item-img" style="width: 60px; height: 60px;">
+      <div class="cart-item-details">
+        <div class="cart-item-title" style="font-size: 0.9rem;">Lavender Essential Oil</div>
+        <div class="cart-item-price" style="font-size: 0.9rem;">₦4,500 × 1</div>
+      </div>
+    </div>
+    
+    <div class="cart-item" style="padding: 0.8rem 0; border-bottom: 1px solid #eee;">
+      <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae" alt="Neem & Turmeric Soap Bar" class="cart-item-img" style="width: 60px; height: 60px;">
+      <div class="cart-item-details">
+        <div class="cart-item-title" style="font-size: 0.9rem;">Neem & Turmeric Soap Bar</div>
+        <div class="cart-item-price" style="font-size: 0.9rem;">₦1,700 × 2</div>
+      </div>
+    </div>
+    
+    <div class="summary-row">
+      <span class="summary-label">Subtotal</span>
+      <span class="summary-value">₦8,600</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Discount</span>
+      <span class="summary-value" style="color: #e53935;">-₦900</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Shipping</span>
+      <span class="summary-value">₦500</span>
+    </div>
+    <div class="summary-row">
+      <span class="summary-label">Tax</span>
+      <span class="summary-value">₦430</span>
+    </div>
+    
+    <div class="summary-row summary-total">
+      <span>Total</span>
+      <span>₦8,630</span>
+    </div>
+    
+    <div style="margin-top: 1.5rem; padding: 1rem; background-color: var(--light-bg); border-radius: 6px;">
+      <h3 style="font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--primary-dark);">Delivery Estimate</h3>
+      <p style="font-size: 0.9rem; color: #555; margin: 0;">Wed, May 15 - Fri, May 17</p>
+    </div>
+  </div>
+</div>
+
+<!-- Footer (Same as your existing site) -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-column">
+      <h3>MarketHub</h3>
+      <p>Your premier multi-vendor marketplace for quality products from trusted sellers.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Marketplace</h3>
+      <ul class="footer-links">
+        <li><a href="#">All Categories</a></li>
+        <li><a href="#">Featured Vendors</a></li>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Deals & Discounts</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Vendor Services</h3>
+      <ul class="footer-links">
+        <li><a href="#">Become a Vendor</a></li>
+        <li><a href="#">Vendor Dashboard</a></li>
+        <li><a href="#">Seller Resources</a></li>
+        <li><a href="#">Shipping Solutions</a></li>
+        <li><a href="#">Vendor Success Stories</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Customer Service</h3>
+      <ul class="footer-links">
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns & Refunds</a></li>
+        <li><a href="#">Track Order</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Newsletter</h3>
+      <p>Subscribe to get updates on new products and special offers!</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Your email address" class="newsletter-input">
+        <button type="submit" class="newsletter-btn">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="copyright">
+    <p>&copy; 2023 MarketHub. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+  </div>
+</footer>
+
+<script>
+  // Toggle between cart and checkout pages
+  const cartPage = document.getElementById('cart-page');
+  const checkoutPage = document.getElementById('checkout-page');
+  const proceedBtn = document.getElementById('proceed-to-checkout');
+  const returnBtn = document.getElementById('return-to-cart');
+  
+  proceedBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    cartPage.classList.add('section-hidden');
+    checkoutPage.classList.remove('section-hidden');
+    window.scrollTo(0, 0);
+  });
+  
+  returnBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    checkoutPage.classList.add('section-hidden');
+    cartPage.classList.remove('section-hidden');
+    window.scrollTo(0, 0);
+  });
+  
+  // Quantity adjustment functionality
+  document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const input = this.nextElementSibling;
+      if (input.value > 1) {
+        input.value--;
+      }
+    });
+  });
+  
+  document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const input = this.previousElementSibling;
+      input.value++;
+    });
+  });
+  
+  // Remove item functionality
+  document.querySelectorAll('.remove-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      this.closest('.cart-item').remove();
+      // In a real app, you would update cart totals here
+    });
+  });
+  
+  // Payment method selection
+  document.querySelectorAll('.payment-method').forEach(method => {
+    method.addEventListener('click', function() {
+      document.querySelectorAll('.payment-method').forEach(m => m.classList.remove('selected'));
+      this.classList.add('selected');
+      this.querySelector('input').checked = true;
+    });
+  });
+  
+  // Same as shipping address toggle
+  document.getElementById('same-as-shipping').addEventListener('change', function() {
+    const billingFields = document.getElementById('billing-address-fields');
+    if (this.checked) {
+      billingFields.style.display = 'none';
+    } else {
+      billingFields.style.display = 'block';
+    }
+  });
+</script>
+
+</body>
+</html>

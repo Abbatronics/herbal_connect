@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organic Chamomile Tea Blend | MarketHub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-bg: #2e8b57;
+      --primary-dark: #246b45;
+      --text-color: white;
+      --hover-bg: #1e5a36;
+      --accent: #daa520;
+      --light-bg: #f0f8f5;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: var(--light-bg);
+    }
+    
+    /* Navbar (Same as your existing site) */
+    nav {
+      display: flex;
+      flex-direction: column;
+      background-color: var(--primary-bg);
+      color: var(--text-color);
+      padding: 0.6rem 1rem;
+      gap: 0.5rem; 
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.6rem; 
+    }
+
+    .nav-top {
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin:0;
+      color: whitesmoke;
+      text-shadow:
+        0 0 5px #ddd,
+        0 0 10px #000,
+        0 0 150px var(--accent);  
+    }
+    .tagline {
+      font-size: 0.9rem;
+      font-style: italic;
+      margin: 0;
+      color: var(--accent);
+    }
+
+    .nav-links-row {
+      justify-content: center;
+      width: 100%;
+    }
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .nav-links a {
+      font-size: 0.95rem;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s;
+      padding: 0.3rem 0;
+      position: relative;
+    }
+    .nav-links a:hover {
+      color: #caffc4;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: var(--accent);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    .nav-links a.active {
+      color: var(--accent);
+    }
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-middle {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      gap: 1rem;
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      max-width: 400px;
+      flex: 1;
+    }
+    .search-box {
+      padding: 0.5rem 1rem;
+      background:#fff;
+      color: var(--primary-dark);
+      border-top-left-radius: 25px;
+      border-bottom-left-radius: 25px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+      flex: 1;
+    }
+    .search-button {
+      padding: 0.5rem 1.2rem;
+      background-color: var(--primary-dark);
+      color: white;
+      border: none;
+      border-top-right-radius: 25px;
+      border-bottom-right-radius: 25px;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background-color 0.3s;
+    }
+    .search-button:hover {
+      background-color: var(--hover-bg);
+    }
+    .vendor-actions {
+      display: flex;
+      gap: 0.8rem;
+    }
+    .vendor-btn {
+      background-color: var(--accent);
+      color: #333;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.4rem 1rem;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+      white-space: nowrap;
+    }
+    .vendor-btn:hover {
+      background-color: #e6c065;
+      transform: translateY(-2px);
+    }
+
+    .nav-bottom {
+      justify-content: space-between;
+      width: 100%;
+    }
+    .user-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .cart-wishlist {
+      display: flex;
+      gap: 1rem;
+    }
+    .nav-icon {
+      position: relative;
+      color: white;
+      font-size: 1.2rem;
+    }
+    .icon-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: var(--accent);
+      color: #333;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .profile-dropdown {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+    .profile-img {
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      object-fit: cover;
+      border: 2px solid var(--accent);
+    }
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background-color: white;
+      border-radius: 8px;
+      list-style: none;
+      padding: 0.5rem 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      width: 200px;
+      z-index: 1001;
+    }
+    .profile-dropdown:hover .dropdown-menu {
+      display: block;
+    }
+    .dropdown-menu li a {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 0.6rem 1rem;
+      text-decoration: none;
+      color: #333;
+      font-size: 0.9rem;
+      transition: all 0.3s;
+    }
+    .dropdown-menu li a i {
+      width: 20px;
+      color: var(--primary-dark);
+    }
+    .dropdown-menu li a:hover {
+      background-color: var(--light-bg);
+      color: var(--primary-dark);
+      padding-left: 1.2rem;
+    }
+    .dropdown-divider {
+      height: 1px;
+      background-color: #eee;
+      margin: 0.5rem 0;
+    }
+
+    /* Product Detail Container */
+    .product-detail-container {
+      display: flex;
+      padding: 2rem;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Product Gallery */
+    .product-gallery {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .main-image {
+      width: 100%;
+      height: 400px;
+      object-fit: contain;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      padding: 1rem;
+    }
+
+    .thumbnail-container {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s;
+    }
+
+    .thumbnail:hover, .thumbnail.active {
+      border-color: var(--primary-dark);
+    }
+
+    /* Product Info */
+    .product-info {
+      flex: 1;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    .vendor-info {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .vendor-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #eee;
+    }
+
+    .vendor-name {
+      font-weight: 600;
+      color: var(--primary-dark);
+    }
+
+    .product-title {
+      font-size: 1.8rem;
+      color: #333;
+      margin: 0 0 1rem;
+    }
+
+    .product-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      background-color: var(--light-bg);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+    }
+
+    .product-rating i {
+      color: var(--accent);
+      font-size: 0.9rem;
+    }
+
+    .product-rating span {
+      font-size: 0.9rem;
+      color: #555;
+    }
+
+    .review-count {
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    .product-badge {
+      background-color: var(--accent);
+      color: #333;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
+
+    .product-price {
+      margin: 1.5rem 0;
+    }
+
+    .current-price {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: var(--primary-dark);
+    }
+
+    .original-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 1.2rem;
+      margin-left: 0.8rem;
+    }
+
+    .discount {
+      color: #e53935;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-left: 0.8rem;
+    }
+
+    .product-description {
+      margin: 1.5rem 0;
+      color: #555;
+      line-height: 1.6;
+    }
+
+    .product-options {
+      margin: 1.5rem 0;
+    }
+
+    .option-title {
+      font-weight: bold;
+      margin-bottom: 0.8rem;
+      color: #333;
+    }
+
+    .option-values {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    .option-value {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .option-value:hover, .option-value.selected {
+      border-color: var(--primary-dark);
+      background-color: var(--light-bg);
+    }
+
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .quantity-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background-color: var(--light-bg);
+      color: var(--primary-dark);
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quantity-input {
+      width: 60px;
+      height: 40px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      margin: 2rem 0;
+    }
+
+    .add-to-cart {
+      flex: 1;
+      padding: 1rem;
+      background-color: var(--primary-dark);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .add-to-cart:hover {
+      background-color: var(--hover-bg);
+    }
+
+    .wishlist-btn {
+      width: 50px;
+      height: 50px;
+      border-radius: 6px;
+      background-color: var(--light-bg);
+      color: var(--primary-dark);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wishlist-btn:hover {
+      background-color: #f8e0e0;
+      color: #e53935;
+    }
+
+    .product-meta-info {
+      margin: 2rem 0;
+      border-top: 1px solid #eee;
+      padding-top: 1.5rem;
+    }
+
+    .meta-item {
+      display: flex;
+      margin-bottom: 0.8rem;
+    }
+
+    .meta-label {
+      font-weight: bold;
+      min-width: 120px;
+      color: #555;
+    }
+
+    .meta-value {
+      color: #333;
+    }
+
+    /* Product Tabs */
+    .product-tabs {
+      margin-top: 2rem;
+    }
+
+    .tab-header {
+      display: flex;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .tab-btn {
+      padding: 0.8rem 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      color: #777;
+      position: relative;
+    }
+
+    .tab-btn.active {
+      color: var(--primary-dark);
+    }
+
+    .tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary-dark);
+    }
+
+    .tab-content {
+      padding: 1.5rem 0;
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .specs-table tr:nth-child(even) {
+      background-color: var(--light-bg);
+    }
+
+    .specs-table th, .specs-table td {
+      padding: 0.8rem;
+      text-align: left;
+      border-bottom: 1px solid #eee;
+    }
+
+    .specs-table th {
+      width: 30%;
+      color: #555;
+    }
+
+    /* Reviews Section */
+    .review-item {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .review-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.8rem;
+    }
+
+    .review-author {
+      font-weight: bold;
+    }
+
+    .review-date {
+      color: #777;
+      font-size: 0.9rem;
+    }
+
+    .review-rating {
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Related Products */
+    .related-products {
+      max-width: 1200px;
+      margin: 3rem auto;
+      padding: 0 2rem;
+    }
+
+    .section-title {
+      color: var(--primary-dark);
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+    }
+
+    .product-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-bottom: 1px solid #eee;
+    }
+
+    .product-info {
+      padding: 1rem;
+    }
+
+    .product-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      color: #333;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .product-price {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 0.8rem 0;
+    }
+
+    .current-price {
+      font-weight: bold;
+      color: var(--primary-dark);
+      font-size: 1.1rem;
+    }
+
+    /* Footer (Same as your existing site) */
+    footer {
+      background-color: var(--primary-dark);
+      color: white;
+      padding: 3rem 1.5rem 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-column h3 {
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-links li {
+      margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s;
+      font-size: 0.9rem;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-links a {
+      color: white;
+      font-size: 1.2rem;
+      transition: color 0.3s;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    .newsletter-form {
+      margin-top: 1rem;
+    }
+
+    .newsletter-input {
+      width: 100%;
+      padding: 0.6rem;
+      border-radius: 4px;
+      border: none;
+      margin-bottom: 0.5rem;
+    }
+
+    .newsletter-btn {
+      background-color: var(--accent);
+      color: #333;
+      border: none;
+      padding: 0.6rem 1rem;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+
+    .newsletter-btn:hover {
+      background-color: #e6c065;
+    }
+
+    .copyright {
+      text-align: center;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .product-detail-container {
+        flex-direction: column;
+      }
+      
+      .thumbnail-container {
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.6rem;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+      }
+      
+      .nav-middle {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      
+      .search-container {
+        max-width: 100%;
+      }
+      
+      .vendor-actions {
+        justify-content: center;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+      }
+      
+      .add-to-cart {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .logo {
+        font-size: 1.5rem;
+      }
+      
+      .nav-links {
+        font-size: 0.9rem;
+        gap: 0.8rem;
+      }
+      
+      .vendor-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+      }
+      
+      .product-title {
+        font-size: 1.5rem;
+      }
+      
+      .name-fields {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <!-- Row 1: Logo and Tagline -->
+  <div class="nav-row nav-top">
+    <h1 class="logo">MarketHub</h1>
+    <p class="tagline">Your Multi-Vendor Marketplace</p>
+  </div>
+
+  <!-- Row 2: Navigation Links -->
+  <div class="nav-row nav-links-row">
+    <ul class="nav-links">
+      <li><a href="#"><i class="fa fa-home"></i> Home</a></li>
+      <li><a href="#"><i class="fa fa-store"></i> Shops</a></li>
+      <li><a href="#"><i class="fa fa-list"></i> Categories</a></li>
+      <li><a href="#"><i class="fa fa-fire"></i> Deals</a></li>
+      <li><a href="#" class="active"><i class="fa fa-info-circle"></i> About</a></li>
+    </ul>
+  </div>
+
+  <!-- Row 3: Search & Vendor Actions -->
+  <div class="nav-row nav-middle">
+    <div class="search-container">
+      <input type="text" placeholder="Search products, vendors..." class="search-box" />
+      <button class="search-button"><i class="fa fa-search"></i> Search</button>
+    </div>     
+    <div class="vendor-actions">
+      <a href="#" class="vendor-btn"><i class="fa fa-store"></i> Become a Vendor</a>
+      <a href="#" class="vendor-btn"><i class="fa fa-sign-in-alt"></i> Vendor Login</a>
+    </div>
+  </div>
+
+  <!-- Row 4: User Actions -->
+  <div class="nav-row nav-bottom">
+    <div class="user-actions">
+      <div class="cart-wishlist">
+        <a href="#" class="nav-icon">
+          <i class="fa fa-heart"></i>
+          <span class="icon-badge">5</span>
+        </a>
+        <a href="#" class="nav-icon">
+          <i class="fa fa-shopping-cart"></i>
+          <span class="icon-badge">3</span>
+        </a>
+      </div>
+      <div class="profile-dropdown">
+        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="User" class="profile-img" />
+        <span>My Account</span>
+        <ul class="dropdown-menu">
+          <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
+          <li><a href="#"><i class="fa fa-box"></i> Orders</a></li>
+          <li><a href="#"><i class="fa fa-heart"></i> Wishlist</a></li>
+          <li><a href="#"><i class="fa fa-comment"></i> Messages</a></li>
+          <li class="dropdown-divider"></li>
+          <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
+          <li><a href="#"><i class="fa fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="product-detail-container">
+  <!-- Product Gallery -->
+  <div class="product-gallery">
+    <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c54" alt="Organic Chamomile Tea Blend" class="main-image">
+    
+    <div class="thumbnail-container">
+      <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c54" alt="Thumbnail 1" class="thumbnail active">
+      <img src="https://images.unsplash.com/photo-1513531926349-466f15ec8cc7" alt="Thumbnail 2" class="thumbnail">
+      <img src="https://images.unsplash.com/photo-1515694346937-94d85e41e6f0" alt="Thumbnail 3" class="thumbnail">
+      <img src="https://images.unsplash.com/photo-1515694346937-94d85e41e6f0" alt="Thumbnail 4" class="thumbnail">
+    </div>
+  </div>
+
+  <!-- Product Info -->
+  <div class="product-info">
+    <div class="vendor-info">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Nature's Best" class="vendor-logo">
+      <span class="vendor-name">Nature's Best</span>
+    </div>
+
+    <h1 class="product-title">Organic Chamomile Tea Blend</h1>
+    
+    <div class="product-meta">
+      <div class="product-rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+        <span>4.7</span>
+      </div>
+      <span class="review-count">(128 reviews)</span>
+      <span class="product-badge">-20%</span>
+    </div>
+
+    <div class="product-price">
+      <span class="current-price">₦2,400</span>
+      <span class="original-price">₦3,000</span>
+      <span class="discount">20% off</span>
+    </div>
+
+    <div class="product-description">
+      <p>Our premium Organic Chamomile Tea Blend is carefully crafted from the finest chamomile flowers, blended with hints of lavender and lemon balm for a soothing and relaxing experience. Perfect for unwinding after a long day or as part of your bedtime routine.</p>
+      <p>• 100% organic ingredients<br>
+         • Caffeine-free<br>
+         • Promotes relaxation and better sleep<br>
+         • Packaged in eco-friendly materials</p>
+    </div>
+
+    <div class="product-options">
+      <div class="option-title">Size:</div>
+      <div class="option-values">
+        <div class="option-value selected">50g</div>
+        <div class="option-value">100g</div>
+        <div class="option-value">200g</div>
+      </div>
+    </div>
+
+    <div class="quantity-selector">
+      <span>Quantity:</span>
+      <button class="quantity-btn">-</button>
+      <input type="number" value="1" min="1" class="quantity-input">
+      <button class="quantity-btn">+</button>
+    </div>
+
+    <div class="action-buttons">
+      <button class="add-to-cart">
+        <i class="fas fa-shopping-cart"></i> Add to Cart
+      </button>
+      <button class="wishlist-btn">
+        <i class="fas fa-heart"></i>
+      </button>
+    </div>
+
+    <div class="product-meta-info">
+      <div class="meta-item">
+        <span class="meta-label">Category:</span>
+        <span class="meta-value">Herbal Teas</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Stock:</span>
+        <span class="meta-value">In Stock (42 available)</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">SKU:</span>
+        <span class="meta-value">CHAM-TEA-50</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Shipping:</span>
+        <span class="meta-value">Free shipping on orders over ₦5,000</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Product Tabs -->
+<div class="product-tabs" style="max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+  <div class="tab-header">
+    <button class="tab-btn active">Description</button>
+    <button class="tab-btn">Specifications</button>
+    <button class="tab-btn">Reviews (128)</button>
+    <button class="tab-btn">Shipping & Returns</button>
+  </div>
+
+  <div class="tab-content active">
+    <h3>Product Details</h3>
+    <p>Our Organic Chamomile Tea Blend is more than just a beverage—it's a wellness experience. Each sip delivers the gentle, floral notes of chamomile complemented by subtle hints of lavender and lemon balm, creating a perfectly balanced herbal infusion.</p>
+    <p><strong>Key Benefits:</strong></p>
+    <ul>
+      <li>Promotes relaxation and reduces stress</li>
+      <li>May help improve sleep quality</li>
+      <li>Contains natural antioxidants</li>
+      <li>Calms the digestive system</li>
+      <li>100% caffeine-free</li>
+    </ul>
+    <p><strong>How to Brew:</strong><br>
+    1. Use 1 teaspoon per cup (250ml)<br>
+    2. Pour freshly boiled water (100°C)<br>
+    3. Steep for 5-7 minutes<br>
+    4. Enjoy plain or with honey</p>
+  </div>
+
+  <div class="tab-content">
+    <table class="specs-table">
+      <tr>
+        <th>Ingredients</th>
+        <td>Organic chamomile flowers, organic lavender, organic lemon balm</td>
+      </tr>
+      <tr>
+        <th>Origin</th>
+        <td>Egypt (chamomile), France (lavender), USA (lemon balm)</td>
+      </tr>
+      <tr>
+        <th>Weight</th>
+        <td>50g / 100g / 200g</td>
+      </tr>
+      <tr>
+        <th>Certifications</th>
+        <td>USDA Organic, EU Organic, Fair Trade</td>
+      </tr>
+      <tr>
+        <th>Shelf Life</th>
+        <td>24 months from production date</td>
+      </tr>
+      <tr>
+        <th>Storage</th>
+        <td>Store in a cool, dry place away from sunlight</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="tab-content">
+    <div class="review-item">
+      <div class="review-header">
+        <span class="review-author">Sarah Johnson</span>
+        <span class="review-date">March 15, 2023</span>
+      </div>
+      <div class="review-rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+      </div>
+      <p>This tea has become my nightly ritual. The flavor is so smooth and relaxing. I've noticed I fall asleep much faster since I started drinking it regularly.</p>
+    </div>
+
+    <div class="review-item">
+      <div class="review-header">
+        <span class="review-author">Michael T.</span>
+        <span class="review-date">February 28, 2023</span>
+      </div>
+      <div class="review-rating">
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star"></i>
+        <i class="fas fa-star-half-alt"></i>
+      </div>
+      <p>Great quality chamomile with a nice hint of lavender. The packaging is beautiful and eco-friendly. Will definitely purchase again.</p>
+    </div>
+
+    <a href="#" style="display: inline-block; margin-top: 1rem; color: var(--primary-dark); font-weight: bold; text-decoration: none;">View all reviews →</a>
+  </div>
+
+  <div class="tab-content">
+    <h3>Shipping Information</h3>
+    <p>We offer nationwide shipping with multiple delivery options:</p>
+    <ul>
+      <li><strong>Standard Shipping:</strong> 3-5 business days (₦500)</li>
+      <li><strong>Express Shipping:</strong> 1-2 business days (₦1,200)</li>
+      <li><strong>Free Shipping:</strong> For orders over ₦5,000</li>
+    </ul>
+    <p>Orders are processed within 1 business day. You will receive a tracking number once your order ships.</p>
+    
+    <h3 style="margin-top: 1.5rem;">Return Policy</h3>
+    <p>We offer a 30-day satisfaction guarantee. If you're not completely satisfied with your purchase, you may return it for a full refund or exchange.</p>
+    <p>To be eligible for a return, your item must be unused and in the same condition that you received it, in its original packaging.</p>
+  </div>
+</div>
+
+<!-- Related Products -->
+<div class="related-products">
+  <h2 class="section-title">You May Also Like</h2>
+  
+  <div class="products-grid">
+    <!-- Product Card 1 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1600250397375-c0c1c7edcc38" class="product-img">
+      <div class="product-info">
+        <h3 class="product-title">Lavender Essential Oil (100ml)</h3>
+        <div class="product-price">
+          <span class="current-price">₦4,500</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Product Card 2 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1601004890684-d8cbf643f5f2" class="product-img">
+      <div class="product-info">
+        <h3 class="product-title">Detox Herbal Tea Collection</h3>
+        <div class="product-price">
+          <span class="current-price">₦3,200</span>
+          <span class="original-price">₦4,000</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Product Card 3 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1584308666744-24d5c474f2ae" class="product-img">
+      <div class="product-info">
+        <h3 class="product-title">Neem & Turmeric Soap Bar</h3>
+        <div class="product-price">
+          <span class="current-price">₦1,700</span>
+          <span class="original-price">₦2,000</span>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Product Card 4 -->
+    <div class="product-card">
+      <img src="https://images.unsplash.com/photo-1595341595379-cf0f2a3c18a3" class="product-img">
+      <div class="product-info">
+        <h3 class="product-title">Peppermint Essential Oil</h3>
+        <div class="product-price">
+          <span class="current-price">₦3,800</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div class="footer-column">
+      <h3>MarketHub</h3>
+      <p>Your premier multi-vendor marketplace for quality products from trusted sellers.</p>
+      <div class="social-links">
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-youtube"></i></a>
+      </div>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Marketplace</h3>
+      <ul class="footer-links">
+        <li><a href="#">All Categories</a></li>
+        <li><a href="#">Featured Vendors</a></li>
+        <li><a href="#">New Arrivals</a></li>
+        <li><a href="#">Deals & Discounts</a></li>
+        <li><a href="#">Gift Cards</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Vendor Services</h3>
+      <ul class="footer-links">
+        <li><a href="#">Become a Vendor</a></li>
+        <li><a href="#">Vendor Dashboard</a></li>
+        <li><a href="#">Seller Resources</a></li>
+        <li><a href="#">Shipping Solutions</a></li>
+        <li><a href="#">Vendor Success Stories</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Customer Service</h3>
+      <ul class="footer-links">
+        <li><a href="#">Contact Us</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns & Refunds</a></li>
+        <li><a href="#">Track Order</a></li>
+      </ul>
+    </div>
+    
+    <div class="footer-column">
+      <h3>Newsletter</h3>
+      <p>Subscribe to get updates on new products and special offers!</p>
+      <form class="newsletter-form">
+        <input type="email" placeholder="Your email address" class="newsletter-input">
+        <button type="submit" class="newsletter-btn">Subscribe</button>
+      </form>
+    </div>
+  </div>
+  
+  <div class="copyright">
+    <p>&copy; 2023 MarketHub. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+  </div>
+</footer>
+
+<script>
+  // Tab functionality
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabBtns.forEach((btn, index) => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons and contents
+      tabBtns.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+      
+      // Add active class to clicked button and corresponding content
+      btn.classList.add('active');
+      tabContents[index].classList.add('active');
+    });
+  });
+
+  // Thumbnail gallery functionality
+  const mainImage = document.querySelector('.main-image');
+  const thumbnails = document.querySelectorAll('.thumbnail');
+
+  thumbnails.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      // Remove active class from all thumbnails
+      thumbnails.forEach(t => t.classList.remove('active'));
+      
+      // Add active class to clicked thumbnail
+      thumb.classList.add('active');
+      
+      // Change main image
+      mainImage.src = thumb.src;
+    });
+  });
+
+  // Quantity selector functionality
+  const quantityInput = document.querySelector('.quantity-input');
+  const minusBtn = document.querySelector('.quantity-btn:first-child');
+  const plusBtn = document.querySelector('.quantity-btn:last-child');
+
+  minusBtn.addEventListener('click', () => {
+    if (quantityInput.value > 1) {
+      quantityInput.value--;
+    }
+  });
+
+  plusBtn.addEventListener('click', () => {
+    quantityInput.value++;
+  });
+
+  // Option selection functionality
+  const optionValues = document.querySelectorAll('.option-value');
+
+  optionValues.forEach(option => {
+    option.addEventListener('click', () => {
+      // Remove selected class from all options
+      optionValues.forEach(opt => opt.classList.remove('selected'));
+      
+      // Add selected class to clicked option
+      option.classList.add('selected');
+    });
+  });
+</script>
+
+</body>
+</html>

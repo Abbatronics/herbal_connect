@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lavender Essential Oil - Product Detail</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0fdf4;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    }
+
+    .vendor-tag {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #2f855a;
+    }
+
+    .vendor-tag img {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+    }
+
+    .product-img {
+      width: 100%;
+      border-radius: 10px;
+      margin: 1rem 0;
+    }
+
+    .product-badge {
+      display: inline-block;
+      background: #ff6b6b;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 12px;
+      margin-top: 10px;
+    }
+
+    .product-title {
+      font-size: 26px;
+      margin: 0.5rem 0;
+      color: #2d3748;
+    }
+
+    .product-vendor {
+      font-size: 14px;
+      color: #718096;
+      margin-bottom: 1rem;
+    }
+
+    .product-price {
+      font-size: 24px;
+      color: #e53e3e;
+      font-weight: bold;
+    }
+
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.2rem;
+    }
+
+    .product-rating i {
+      color: #ecc94b;
+    }
+
+    .product-rating span {
+      font-size: 14px;
+      color: #4a5568;
+      margin-left: 5px;
+    }
+
+    .product-actions button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      margin-left: 10px;
+      color: #4a5568;
+    }
+
+    .product-actions button:hover {
+      color: #2b6cb0;
+    }
+
+    .buy-btn {
+      margin-top: 1.5rem;
+      padding: 12px 24px;
+      background: #38a169;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .buy-btn:hover {
+      background: #2f855a;
+    }
+
+    .section {
+      margin-top: 2.5rem;
+    }
+
+    .section h4 {
+      font-size: 20px;
+      color: #2f855a;
+      border-bottom: 2px solid #c6f6d5;
+      padding-bottom: 5px;
+    }
+
+    .description p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #4a5568;
+      margin-top: 1rem;
+    }
+
+    .review {
+      background: #f7fafc;
+      border-left: 4px solid #68d391;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+    }
+
+    .review strong {
+      color: #2d3748;
+    }
+
+    .review-form {
+      margin-top: 1.5rem;
+    }
+
+    .review-form input,
+    .review-form textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #cbd5e0;
+      border-radius: 6px;
+    }
+
+    .review-form button {
+      padding: 10px 20px;
+      background-color: #2f855a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .review-form button:hover {
+      background-color: #276749;
+    }
+
+    .carousel-container {
+      overflow-x: auto;
+      white-space: nowrap;
+      padding-bottom: 1rem;
+    }
+
+    .recommended-products {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .recommended-card {
+      background: #f0fff4;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+      width: 180px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .recommended-card img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .recommended-title {
+      font-size: 14px;
+      margin: 0.5rem 0;
+      color: #2f855a;
+    }
+
+    .recommended-price {
+      font-weight: bold;
+      color: #38a169;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="vendor-tag">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Vendor"> Organic Living
+    </div>
+
+    <span class="product-badge">New</span>
+
+    <img src="https://images.unsplash.com/photo-1600250397375-c0c1c7edcc38" class="product-img" alt="Lavender Oil">
+
+    <h3 class="product-title">Lavender Essential Oil (100ml)</h3>
+    <div class="product-vendor">by Organic Living</div>
+
+    <div class="product-price">₦4,500</div>
+
+    <div class="product-meta">
+      <div class="product-rating">
+        <i class="fa fa-star"></i><i class="fa fa-star"></i>
+        <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>
+        <span>(256 reviews)</span>
+      </div>
+      <div class="product-actions">
+        <button onclick="addToCart()"><i class="fa fa-heart"></i></button>
+        <button onclick="addToCart()"><i class="fa fa-shopping-cart"></i></button>
+      </div>
+    </div>
+
+    <button class="buy-btn" onclick="addToCart()">Add to Cart</button>
+
+    <!-- Description -->
+    <div class="section description">
+      <h4>Description</h4>
+      <p>
+        Discover the calming aroma of our 100% pure Lavender Essential Oil. Known for its soothing properties, this essential oil is perfect for relaxation, stress relief, and promoting restful sleep.
+      </p>
+    </div>
+
+    <!-- Reviews -->
+    <div class="section reviews">
+      <h4>Customer Reviews</h4>
+      <div class="review"><strong>Fatima A.</strong> — "Smells divine! Helps me sleep better."</div>
+      <div class="review"><strong>Obinna N.</strong> — "Very soothing and calming. Great quality!"</div>
+
+      <!-- Review Form -->
+      <form class="review-form" onsubmit="submitReview(event)">
+        <input type="text" id="reviewerName" placeholder="Your Name" required>
+        <textarea id="reviewText" rows="3" placeholder="Write your review..." required></textarea>
+        <button type="submit">Submit Review</button>
+      </form>
+      <div id="newReviews"></div>
+    </div>
+
+    <!-- Recommended Products -->
+    <div class="section recommended">
+      <h4>Recommended Products</h4>
+      <div class="carousel-container">
+        <div class="recommended-products">
+          <div class="recommended-card">
+            <img src="https://images.unsplash.com/photo-1582810822224-83d9ff3476f1" alt="Peppermint Oil" />
+            <div class="recommended-title">Peppermint Oil</div>
+            <div class="recommended-price">₦3,200</div>
+          </div>
+          <div class="recommended-card">
+            <img src="https://images.unsplash.com/photo-1624358501341-3aa888d7a213" alt="Tea Tree Oil" />
+            <div class="recommended-title">Tea Tree Oil</div>
+            <div class="recommended-price">₦4,000</div>
+          </div>
+          <div class="recommended-card">
+            <img src="https://images.unsplash.com/photo-1584467735871-261c72d4e9b6" alt="Rose Oil" />
+            <div class="recommended-title">Rose Oil</div>
+            <div class="recommended-price">₦5,800</div>
+          </div>
+          <div class="recommended-card">
+            <img src="https://images.unsplash.com/photo-1588776814546-b131723651d4" alt="Eucalyptus Oil" />
+            <div class="recommended-title">Eucalyptus Oil</div>
+            <div class="recommended-price">₦3,800</div>
+          </div>
+          <div class="recommended-card">
+            <img src="https://images.unsplash.com/photo-1628597086356-83b4f7c31fbd" alt="Neem Oil" />
+            <div class="recommended-title">Neem Oil</div>
+            <div class="recommended-price">₦2,900</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function addToCart() {
+      alert('Product added to cart!');
+      // Later: Use AJAX to post to Django/React backend
+    }
+
+    function submitReview(event) {
+      event.preventDefault();
+      const name = document.getElementById('reviewerName').value;
+      const text = document.getElementById('reviewText').value;
+      const reviewContainer = document.getElementById('newReviews');
+
+      const reviewHTML = `<div class="review"><strong>${name}</strong> — "${text}"</div>`;
+      reviewContainer.insertAdjacentHTML('beforeend', reviewHTML);
+
+      // Reset form
+      event.target.reset();
+    }
+  </script>
+
+</body>
+</html>
+
